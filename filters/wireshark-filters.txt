@@ -1,0 +1,28 @@
+# Warzone 1 - Wireshark display filters
+
+# Flagged C2 IP
+ip.addr == 169.239.128.11
+
+# HTTP traffic involving flagged C2 IP
+http && ip.addr == 169.239.128.11
+
+# HTTP traffic involving compromised endpoint
+ip.addr == 172.16.1.102 && http
+
+# First malware delivery host
+ip.addr == 185.10.68.235 && http.request
+
+# Second malware delivery host
+ip.addr == 192.36.27.92 && http.request
+
+# Show HTTP user-agent fields
+http.user_agent
+
+# Find MSI download requests
+http.request.uri contains ".msi"
+
+# Broader first-host traffic for TCP-stream inspection
+ip.addr == 185.10.68.235
+
+# Broader second-host traffic for TCP-stream inspection
+ip.addr == 192.36.27.92
